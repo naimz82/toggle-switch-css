@@ -8,7 +8,6 @@ The input stays accessible, while a sibling span renders the switch.
 
 ```html
 <label class="switch">
-	<span class="switch_label">Enable setting</span>
 	<input class="switch_input" type="checkbox" role="switch">
 	<span class="switch_track" aria-hidden="true"></span>
 </label>

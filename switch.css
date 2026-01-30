@@ -1,0 +1,87 @@
+/* Colour and size variables */
+:root {
+	--switch-width: 52px;
+	--switch-height: 28px;
+	--switch-padding: 3px;
+	--switch-off: #c5c5c5;
+	--switch-on: #3b82fa;
+	--switch-thumb: #ffffff;
+	--switch-focus: #1d4ed8;
+	--page-bg: #212121;
+	--text: #e2e8f0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	background: var(--page-bg);
+	color: var(--text);
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Switch container */
+.switch {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+/* Visibly hide the native checkbox input */
+.switch_input {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+}
+
+/* Switch track (the background of the switch) */
+.switch_track {
+	position: relative;
+	width: var(--switch-width);
+	height: var(--switch-height);
+	background: var(--switch-off);
+	border-radius: 999px;
+	transition: background 200ms ease;
+	cursor: pointer;
+}
+
+/* Switch thumb (the circle that moves) */
+.switch_track::before {
+	content: "";
+	position: absolute;
+	top: var(--switch-padding);
+	left: var(--switch-padding);
+	width: calc(var(--switch-height) - var(--switch-padding) * 2);
+	height: calc(var(--switch-height) - var(--switch-padding) * 2);
+	background: var(--switch-thumb);
+	border-radius: 999px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+	transition: transform 200ms ease;
+}
+
+.switch_input:checked + .switch_track {
+	background: var(--switch-on);
+}
+
+.switch_input:checked + .switch_track::before {
+	transform: translateX(calc(var(--switch-width) - var(--switch-height)));
+}
+
+.switch_input:focus-visible + .switch_track {
+	outline: 3px solid var(--switch-focus);
+	outline-offset: 4px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+	.switch_track,
+	.switch_track::before {
+		transition: none;
+	}
+}
